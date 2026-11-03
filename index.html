@@ -408,6 +408,37 @@ rt{font-size:.42em;font-weight:500;letter-spacing:0;opacity:.9}
 .dlist .dl:nth-child(even){background:var(--blue-soft)}
 .dlist .dl .k{color:var(--muted)}
 .dlist .dl .sp{color:var(--coral)}
+.jc{max-height:calc(100vh - 230px);overflow-y:auto}
+.jci{display:flex;flex-direction:column;padding:7px 0;border-top:1px solid #e3ebf6;font-size:.86rem;color:#3c4766}
+.jci b{color:#1d2747;font-size:.95rem}.jci b .ja{font-weight:600;color:#d23552;font-size:.9rem}
+.lgc .jci{border-color:var(--line);color:var(--muted)}.lgc .jci b{color:var(--ink)}
+.lscript{width:100%;text-align:left;padding:10px 12px;border-radius:16px;background:rgba(255,255,255,.18);font-size:.95rem;line-height:1.8}
+.lscript b{display:inline-block;width:20px;color:#ffe08a}
+.reel.exr{justify-content:flex-start;overflow-y:auto;padding-top:calc(72px + env(safe-area-inset-top,0px));padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))}
+.exr .qr{gap:8px}
+.exr .qopts.one .qopt{min-height:44px;padding:8px 12px;border-radius:14px}
+.exr .qopt .ja.sm{font-size:.98rem;line-height:1.5}
+.exr .combo{min-height:0}
+.exr .qfeed img{width:54px;height:68px}
+.exr .swipe{position:static;transform:none;margin-top:6px}
+.exq{font-weight:700;font-size:1rem;line-height:1.5;max-width:380px}
+.exq u{text-decoration-thickness:2px;text-underline-offset:3px}
+.exps{font-size:.98rem!important;line-height:1.8!important}
+.exps u{text-decoration-thickness:2px}
+.gqo .qopt{justify-content:flex-start;text-align:left;gap:10px}
+.qopt .cn{font-weight:700;opacity:.6;flex:none}
+.oslots{width:100%;min-height:64px;padding:10px 12px;border-radius:18px;background:rgba(255,255,255,.96);color:#1d2747;display:flex;flex-wrap:wrap;gap:4px 8px;align-items:center;font-size:1.1rem;font-weight:600;line-height:1.8}
+.oslots .ph{font-family:var(--font-body);font-weight:500;font-size:.85rem;color:#8a95b0}
+.oslots.ok{box-shadow:0 0 0 3px #14a378}.oslots.no{box-shadow:0 0 0 3px #e0384f}
+.ochips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;width:100%}
+.ochip{padding:9px 14px;border-radius:14px;background:rgba(255,255,255,.2);border:1.5px solid rgba(255,255,255,.6);color:#fff;font-weight:600;font-size:1.05rem;line-height:1.7}
+.ochip:disabled{opacity:.3}
+.winput{width:100%;font-size:17px;line-height:1.6;padding:12px 14px;border-radius:16px;border:0;background:rgba(255,255,255,.96);color:#1d2747;resize:none}
+.wans{position:relative;width:100%;text-align:left;padding:10px 54px 10px 14px;border-radius:16px;background:#fff6d6;color:#1d2747}
+.wans small{display:block;font-weight:700;color:#d23552;font-size:.75rem}
+.wans .ja{font-weight:600;font-size:1.08rem;line-height:1.8}
+.wans .speak{position:absolute;right:8px;top:50%;transform:translateY(-50%)}
+.rbtn svg{width:18px;height:18px;vertical-align:-3px}
 .plan{padding:10px 12px;border-radius:14px;background:var(--blue-soft);font-size:.86rem}
 @keyframes swap{0%,42%{opacity:0}50%,92%{opacity:1}100%{opacity:0}}
 @keyframes swapb{0%,42%{opacity:1}50%,92%{opacity:0}100%{opacity:1}}
@@ -512,7 +543,7 @@ const GROUPS = [{n:"히라가나 청음",f:x=>x.s==="h"&&x.g==="sei"},{n:"히라
 const PAL = {h:{sei:["#163a8c","#2b86ee","#7cc2ff"],daku:["#1b2f74","#3c6fe0","#9ab8ff"]},k:{sei:["#7a1f4d","#d93a67","#ff9cba"],daku:["#5e1f5e","#b13f86","#f0a2d2"]},q:["#141c46","#3a3f9e","#7a74d8"]};
 const INTERVALS=[1,3,7,14,30];
 const LVS=[0,120,350,700,1200,1900,2800];
-const QT={mean:"뜻 고르기",jsel:"일본어 고르기",yomi:"한자 읽기",conj:"동사 활용",gram:"문법·조사",fix:"틀린 곳 고치기",dlg:"본문 대사",read:"문자 읽기",pick:"글자 고르기",listen:"듣고 고르기",pair:"히라↔가타 짝"};
+const QT={exam:"단원 평가 객관식",ord:"어순 배열",wr:"서술형 쓰기",cult:"일본 문화 OX",ulisten:"듣기 평가",mean:"뜻 고르기",jsel:"일본어 고르기",yomi:"한자 읽기",conj:"동사 활용",gram:"문법·조사",fix:"틀린 곳 고치기",dlg:"본문 대사",read:"문자 읽기",pick:"글자 고르기",listen:"듣고 고르기",pair:"히라↔가타 짝"};
 
 /* ---------------- 상태 & 저장 ---------------- */
 const KEY="nihongo-note-v1";
@@ -919,6 +950,106 @@ const UNITS_RAW = {
   ["틀린 곳 고치기: ダンスを 習[なら]うたいです。",["習[なら]いたいです","習[なら]わたいです","習[なら]ったいです","習[なら]えたいです"],0,"たい 앞은 ます형: 習い + たい","fix"]
  ]}
 };
+
+/* 일본 문화 쪽 (교과서 92~93, 106~107, 120~121쪽) · OX: [문장, 정답(1=○), 해설] · 교과서 유퀴즈 + 같은 쪽 내용으로 만든 문제 */
+const JCULT={
+5:{t:"마쓰리와 유카타",pg:"92~93쪽",r:"일본의 전통 마쓰리는 풍년을 바라고 전염병·재해 등을 피하기 위해 신에게 기원하는 의식에서 시작되었다. 현대에는 지역의 특색을 살린 마쓰리도 많아졌다.",
+ it:[["간다 마쓰리","かんだまつり","도쿄, 5월 · 간다 신사의 축제, 미코시 행렬"],["기온 마쓰리","ぎおんまつり","교토, 7월 · 큰 수레 야마보코(やまぼこ) 행렬"],["덴진 마쓰리","てんじんまつり","오사카, 7월 · 수많은 배가 강을 거슬러 올라감"],["3대 마쓰리","","간다 · 기온 · 덴진"],["네부타 마쓰리","","아오모리, 8월 · 거대한 유등 네부타와 군무 퍼레이드"],["간토 마쓰리","","아키타, 8월 · 등을 단 대나무를 손·이마·어깨·허리로 옮기는 묘기"],["핫피","はっぴ","마쓰리 참가자가 입는 통소매 상의"],["야타이","やたい","포장마차 · 야키소바, 다코야키, 구운 옥수수, 초코바나나, 빙수"],["유카타","ゆかた","면·마 소재, 주로 여름 · 맨발에 게다(げた) · 혼자 입을 수 있음"],["기모노","きもの","비단 소재, 사계절 · 다비(たび)에 조리(ぞうり) · 전문가 도움을 받아 입음"]],
+ ox:[["덴진 마쓰리가 열리는 지역은 오사카이다.",1,"덴진 마쓰리는 오사카, 7월"],["네부타 마쓰리는 야마보코의 행렬이 유명하다.",0,"야마보코 행렬은 교토의 기온 마쓰리"],["여름이 되면 전국 각지에서 마쓰리와 벚꽃놀이를 즐길 수 있다.",0,"여름에는 마쓰리와 불꽃놀이"],["유카타는 맨발에 게다를 신는 것이 일반적이다.",1,"기모노는 다비에 조리"],["기모노는 주로 여름에만 입는다.",0,"기모노는 사계절, 유카타가 주로 여름"]]},
+6:{t:"연중행사와 특별한 날 음식",pg:"106~107쪽",r:"일본은 계절별로 다양한 연중행사가 열린다. 세쓰분, 히나마쓰리, 단고노셋쿠에는 특별한 음식을 먹는 관습이 있다.",
+ it:[["세쓰분","せつぶん","입춘 전날, 2월 3일 무렵 · 'おには そと、ふくは うち'라고 외치며 콩을 뿌리거나 나이만큼 콩을 먹음 · 에호마키(えほうまき)"],["히나마쓰리","ひなまつり","3월 3일 · 여자아이의 건강한 성장과 행복 · 히나 인형 · 지라시즈시(ちらしずし)"],["단고노셋쿠","たんごの せっく","5월 5일 어린이날 · 남자아이의 성장과 출세 · 무사 인형, 고이노보리(こいのぼり) · 가시와모치(かしわもち)"],["다나바타","たなばた","7월 7일 · 단자쿠(たんざく)에 소원을 적어 대나무에 매닮 · 센다이 다나바타 마쓰리는 8월 6~8일"],["오본","おぼん","보통 8월 13~16일 무렵 · 귀성·성묘 · 본오도리(ぼんおどり)"],["시치고산","しちごさん","11월 15일 · 3·5세 남자아이, 3·7세 여자아이 · 지토세아메(ちとせあめ)"],["성인의 날","せいじんの ひ","1월 둘째 주 월요일 · 성인식, 여성은 대개 기모노"]],
+ ox:[["히나마쓰리는 남자아이의 건강한 성장을 기원하는 날이다.",0,"히나마쓰리는 여자아이, 남자아이는 단고노셋쿠"],["다나바타에는 단자쿠에 소원을 적어 대나무에 매단다.",1,"단자쿠(たんざく)"],["성인의 날은 1월 셋째 주 월요일이다.",0,"1월 둘째 주 월요일"],["세쓰분에는 귀신을 쫓으려고 콩을 뿌린다.",1,"おには そと、ふくは うち"],["히나마쓰리 날에는 가시와모치를 먹는다.",0,"히나마쓰리는 지라시즈시, 가시와모치는 단고노셋쿠"]]},
+7:{t:"연말연시와 설날 놀이",pg:"120~121쪽",r:"12월 25일 크리스마스 이후 일본은 새해맞이 준비로 분주해진다. 대청소를 하고 새해맞이 장식을 준비한다.",
+ it:[["오미소카","おおみそか","12월 31일 · 장수와 복을 바라며 도시코시소바(としこしそば) · 제야의 종, 카운트다운"],["하쓰모데","はつもうで","새해 처음 신사나 절에 가서 참배"],["설날","おしょうがつ","1월 1~7일 무렵 · 1월 1일(がんじつ) 아침에 오세치 요리·오조니 · 세뱃돈(おとしだま)은 받지만 세배는 하지 않음"],["오세치 요리","おせちりょうり","미리 준비해 찬합에 담는 새해 음식"],["오조니","おぞうに","우리나라 떡국 같은 음식 · 지역마다 떡 모양이 다름"],["가도마쓰","かどまつ","소나무·대나무 장식 · 출입문 앞에 세움"],["가가미모치","かがみもち","떡 두 개를 겹치고 등자나무 열매나 귤을 얹음"],["시메카자리","しめかざり","풍년 기원·액운 막기 · 현관이나 실내 장식"],["연하장","ねんがじょう","1월 1일 아침에 한꺼번에 배달"],["후쿠부쿠로","ふくぶくろ","연초에 크게 할인해 상품을 채워 파는 가방"],["설날 놀이","","후쿠와라이(얼굴 완성), 카루타(카드), 스고로쿠(주사위)"]],
+ ox:[["12월 31일에는 장수와 복을 바라며 도시코시소바를 먹는다.",1,"오미소카(おおみそか)"],["건물 출입문 앞에 소나무 등으로 장식하는 것을 가가미모치라고 한다.",0,"출입문 앞 장식은 가도마쓰"],["오조니는 우리나라의 떡국과 같은 음식이다.",1,"おぞうに"],["일본 아이들은 세배를 하고 세뱃돈을 받는다.",0,"세뱃돈(おとしだま)은 받지만 세배는 하지 않음"],["카루타는 주사위를 던져 먼저 도착하면 이기는 놀이이다.",0,"주사위 놀이는 스고로쿠, 카루타는 카드놀이"]]}
+};
+/* 듣기 평가 (교과서 듣기 대본 · 실력 확인하기 1번) */
+const ULISTEN={
+5:[[["いぬは どこに いますか。","ベッドの 下[した]に います。"],"개는 어디에 있나요?",["침대 아래","침대 위","책상 아래","가방 안"]],
+   [["スマホは どこに ありますか。","つくえの 上[うえ]に あります。"],"스마트폰은 어디에 있나요?",["책상 위","책상 아래","의자 위","가방 안"]],
+   [["本[ほん]は どこに ありますか。","かばんの 中[なか]に あります。"],"책은 어디에 있나요?",["가방 안","가방 옆","책상 위","의자 아래"]]],
+6:[[["やまださん、週末[しゅうまつ] 何[なに]を する 予定[よてい]ですか。","友[とも]だちと しゅくだいを する 予定[よてい]です。"],"야마다 씨의 주말 예정은?",["친구와 숙제","엄마와 쇼핑","편의점 아르바이트","바다에 놀러 가기"]],
+   [["すずきさん、土[ど]ようびは 何[なに]を しますか。","母[はは]と 買[か]い物[もの]に 行[い]く 予定[よてい]です。"],"스즈키 씨의 토요일 예정은?",["엄마와 쇼핑","친구와 숙제","편의점 아르바이트","도서관에서 책 빌리기"]],
+   [["さとうさん、明日[あした] 何[なに]を しますか。","コンビニで バイトを する 予定[よてい]です。"],"사토 씨는 내일 무엇을 하나요?",["편의점 아르바이트","친구와 숙제","엄마와 쇼핑","스키 타기"]]],
+7:[[["来週[らいしゅう]から 夏休[なつやす]みですね。やまださんは 夏休[なつやす]みに 何[なに]を しますか。","友[とも]だちと 海[うみ]に 行[い]きたいです。"],"야마다 씨가 여름 방학에 하고 싶은 것은?",["친구와 바다에 가기","가족과 온천 가기","영화 보기","춤 배우기"]],
+   [["週末[しゅうまつ]、映画[えいが]を 見[み]に 行[い]きませんか。","ええ、いいですよ。"],"두 사람은 주말에 무엇을 하기로 했나요?",["영화 보러 가기","노래방 가기","쇼핑하기","조깅하기"]]]
+};
+/* ---------------- 단원 평가 (교사용 지도서 3단원 단원 평가 형식을 따라 5~7과로 만든 예상 문제) ----------------
+   mc: [발문, 지문(없으면 ""), 선택지 5개, 정답 번호(0~4), 해설]
+   ord: [우리말, 정답 순서의 조각들]
+   wr: [우리말(상황), 정답들(첫 번째가 대표 답)] */
+const EXAM={
+5:{mc:[
+ ["일본어와 뜻이 바르게 연결되지 <u>않은</u> 것은?","",["うえ - 위","した - 아래","なか - 안","うしろ - 옆","まえ - 앞"],3,"うしろ는 '뒤', 옆은 となり·よこ"],
+ ["빈칸에 들어갈 말로 알맞은 것은?","A: あのう、すみません。トイレは どこに ありますか。<br>B: コンビニの （　　） あります。",["前[まえ]に","前[まえ]を","前[まえ]で","前[まえ]が","前[まえ]へ"],0,"위치 + に あります"],
+ ["빈칸에 공통으로 들어갈 말로 알맞은 것은?","ねこは つくえの 下[した]に （　　）。<br>まおさんは バスていの 前[まえ]に （　　）。",["います","あります","ありません","でした","です"],0,"사람·동물은 います"],
+ ["빈칸 (a), (b)에 들어갈 말로 알맞은 것은?","やたいが いっぱい （a）ね。<br>あっ！ りんごあめの 前[まえ]に （b）よ。",["(a) ある · (b) いる","(a) いる · (b) ある","(a) ある · (b) ある","(a) いる · (b) いる","(a) ない · (b) いる"],0,"포장마차(사물)는 ある, 사람은 いる"],
+ ["형용사의 과거 표현이 바르지 <u>않은</u> 것은?","",["楽[たの]しい → 楽[たの]しかったです","おいしい → おいしかったです","きれいだ → きれいでした","にぎやかだ → にぎやかでした","むずかしい → むずかしいでした"],4,"い형용사 과거는 어간 + かったです → むずかしかったです"],
+ ["밑줄 친 부분의 의미로 알맞은 것은?","A: 花火大会[はなびたいかい]は どうでしたか。<br>B: とても <u>にぎやかでした</u>。",["북적였습니다","조용했습니다","즐거웠습니다","예뻤습니다","힘들었습니다"],0,"にぎやかだ = 북적이다, 번화하다"],
+ ["칭찬에 대한 대답으로 알맞지 <u>않은</u> 것은?","A: 歌[うた]、上手[じょうず]ですね。<br>B: （　　）",["ありがとうございます。","いいえ、そんな こと ありませんよ。","でも、まだまだです。","ありがとうございます。でも、まだまだです。","はい、わたしは 歌[うた]が 上手[じょうず]です。"],4,"자기 자랑에 上手는 어색해요. 감사하거나 겸손하게 대답"],
+ ["'きれいだ'의 쓰임이 가장 어색한 것은?","",["あれが ふじさんです。きれいですね。","この こうえん、きれいだね。","花火[はなび]、きれいだったね。","その ぼうし、きれいだね。","わあ、ゆかた、きれ～い。"],3,"평소 쓰는 모자·넥타이에는 すてきだ"],
+ ["빈칸에 들어갈 말로 알맞은 것은?","花火[はなび]（　　） あやのの ほうが きれいだよ。",["より","から","まで","の","に"],0,"~より ~の ほうが: ~보다 ~쪽이"],
+ ["대화를 이해한 내용으로 알맞은 것은?","A: やたいが いっぱい あるね。<br>B: ほんと。あっ、おみこし！<br>A: あれ？ シウ君[くん]たち、どこ？<br>B: あっ！ りんごあめの 前[まえ]に いるよ。<br>A: 花火[はなび]、きれいだったね。<br>B: うん。りんごあめも おいしかったね。",["포장마차가 거의 없다.","시우네는 사과 사탕 가게 앞에 있다.","미코시는 보이지 않았다.","사과 사탕은 맛이 없었다.","불꽃놀이는 내일 열린다."],1,"りんごあめの 前に いるよ"],
+ ["글의 내용으로 알맞지 <u>않은</u> 것은?","わたしの 町[まち]は 小[ちい]さいですが、にぎやかです。家[いえ]の 近[ちか]くに 本屋[ほんや]が あります。本屋[ほんや]の となりに ぎんこうが あります。わたしの 町[まち]には ゆうびんきょくは ありません。",["동네는 작지만 번화하다.","집 근처에 서점이 있다.","서점 옆에 은행이 있다.","동네에 우체국이 있다.","은행은 서점 옆에 있다."],3,"ゆうびんきょくは ありません = 우체국은 없다"],
+ ["낱말 카드의 □에 공통으로 들어갈 글자는?","パー□ィー　　□スト",["テ","チ","ト","ラ","ナ"],0,"パーティー(파티), テスト(시험)"],
+ ["빈칸에 들어갈 말로 알맞은 것은?","A: 昨日[きのう]の パーティーは どうでしたか。<br>B: とても にぎやかでしたが、あまり （　　）。",["おもしろく なかったです","おもしろかったです","おもしろいでした","おもしろく ないでした","おもしろじゃ なかったです"],0,"あまり ~ない: 별로 ~하지 않다. い형용사 과거 부정은 ~く なかったです"],
+ ["일본의 마쓰리에 대한 설명으로 옳지 <u>않은</u> 것은?","",["간다 마쓰리는 도쿄에서 열린다.","기온 마쓰리는 야마보코 행렬이 유명하다.","덴진 마쓰리는 오사카에서 열린다.","네부타 마쓰리는 아오모리에서 열린다.","간토 마쓰리는 교토에서 열린다."],4,"간토 마쓰리는 아키타, 8월"],
+ ["유카타와 기모노에 대한 설명으로 옳은 것만을 있는 대로 고른 것은?","a. 유카타는 주로 여름에 입는다.<br>b. 기모노는 혼자서 입기 쉽다.<br>c. 유카타는 맨발에 게다를 신는 것이 일반적이다.<br>d. 기모노는 주로 면·마 소재로 만든다.",["a, b","a, c","b, c","b, d","c, d"],1,"기모노는 비단 소재, 전문가 도움을 받아 입음"],
+ ["마쓰리 참가자들이 입는 통소매 상의를 무엇이라고 하는가?","",["はっぴ","ゆかた","げた","たび","ぞうり"],0,"はっぴ(핫피)"]],
+ ord:[["편의점은 우체국 옆에 있습니다.",["コンビニは","ゆうびんきょくの","となりに","あります。"]],
+      ["마오 씨는 서점 앞에 있습니다.",["まおさんは","本屋[ほんや]の","前[まえ]に","います。"]],
+      ["불꽃 축제는 즐거웠지만 사람이 많았습니다.",["花火大会[はなびたいかい]は","楽[たの]しかったですが、","人[ひと]が","おおかったです。"]]],
+ wr:[["버스 정류장은 어디에 있습니까?",["バスていは どこに ありますか。"]],
+     ["영화는 재미있었습니다.",["映画[えいが]は おもしろかったです。"]],
+     ["(말하기 수행) 친구가 '歌、上手ですね。'라고 칭찬했어요. 겸손하게 대답해 보세요.",["いいえ、そんな こと ありませんよ。","ありがとうございます。でも、まだまだです。"]]]},
+6:{mc:[
+ ["동사의 종류가 바르게 연결되지 <u>않은</u> 것은?","",["会[あ]う - 1류","見[み]る - 2류","帰[かえ]る - 2류","来[く]る - 3류","食[た]べる - 2류"],2,"帰る는 모양은 2류 같지만 예외 1류"],
+ ["ます형이 바르지 <u>않은</u> 것은?","",["書[か]く → 書[か]きます","読[よ]む → 読[よ]みます","ねる → ねます","来[く]る → 来[き]ます","帰[かえ]る → 帰[かえ]ます"],4,"帰る는 1류 → 帰ります"],
+ ["빈칸에 들어갈 말로 알맞은 것은?","来週[らいしゅう]、友[とも]だち（　　） 会[あ]う 予定[よてい]です。",["に","を","が","で","へ"],0,"'~을 만나다'는 ~に 会う"],
+ ["빈칸에 들어갈 말로 알맞은 것은?","明日[あした]、買[か]い物[もの]に （　　） 予定[よてい]です。",["行[い]く","行[い]きます","行[い]き","行[い]って","行[い]きに"],0,"予定です 앞은 기본형"],
+ ["빈칸 (a), (b)에 들어갈 말로 알맞은 것은?","A: フランス語[ご]を 話[はな]す ことが （a）か。<br>B: いいえ、（b）。",["(a) できます · (b) できません","(a) します · (b) しません","(a) できます · (b) できます","(a) あります · (b) ありません","(a) できません · (b) できます"],0,"기본형 + ことが できます / できません"],
+ ["빈칸에 들어갈 말로 알맞은 것은?","図書館[としょかん]に 本[ほん]を （　　） 行[い]きました。",["借[か]りに","借[か]りるに","借[か]りを","借[か]ります","借[か]りた"],0,"목적: ます형 + に 行きます"],
+ ["빈칸에 공통으로 들어갈 말로 알맞은 것은?","しょうらいの ゆめは 先生[せんせい]（　　） なる ことです。<br>自転車[じてんしゃ]（　　） のる ことが できます。",["に","を","が","で","へ"],0,"~に なる(~이 되다), ~に のる(~을 타다)"],
+ ["자기가 잘하는 것을 말할 때 가장 자연스러운 것은?","",["わたしは スポーツが とくいです。","わたしは スポーツが 上手[じょうず]です。","わたしは スポーツを とくいです。","わたしは スポーツに とくいです。","わたしは スポーツで 上手[じょうず]です。"],0,"자기 = とくいだ, 대상 조사는 が"],
+ ["아야노의 글을 이해한 내용으로 알맞지 <u>않은</u> 것은?","わたしは 夏休[なつやす]みに ボランティアを する 予定[よてい]です。外国[がいこく]の 子[こ]どもたちに 日本[にほん]の 文化[ぶんか]を しょうかいします。かみずもうで あそびます。どこで: せんだい公園[こうえん]<br>シウ: ぼくも 何[なに]か てつだうよ。<br>あやの: じゃあ、しゃしん、おねがいできる？",["아야노는 여름 방학에 봉사 활동을 할 예정이다.","외국 아이들에게 일본 문화를 소개한다.","종이 스모로 논다.","행사는 센다이 공원에서 열린다.","시우는 요리를 도와주기로 했다."],4,"시우가 맡은 일은 사진(しゃしん)"],
+ ["밑줄 친 부분의 의미로 알맞은 것은?","シウ: うん、いいよ。<u>ぼく、しゃしん とくい！</u>",["나 사진 잘 찍어!","나 사진 좋아해!","나 사진 못 찍어!","나 사진 찍을 예정이야!","나 사진 싫어!"],0,"とくいだ = 잘하다, 자신 있다"],
+ ["글의 내용으로 알맞은 것은?","わたしは 週末[しゅうまつ]に デパートに さいふを 買[か]いに 行[い]きました。来週[らいしゅう]は 友[とも]だちと 海[うみ]へ あそびに 行[い]く 予定[よてい]です。",["주말에 백화점에 지갑을 사러 갔다.","주말에 바다에 놀러 갔다.","다음 주에 혼자 바다에 간다.","다음 주에 지갑을 살 예정이다.","친구와 백화점에서 만났다."],0,"買いに 行きました = 사러 갔습니다"],
+ ["빈칸에 들어갈 말로 알맞은 것은?","A: 週末[しゅうまつ]、何[なに]を しましたか。<br>B: 海[うみ]へ （　　）に 行[い]きました。",["あそび","あそぶ","あそば","あそんで","あそべ"],0,"あそぶ → ます형 あそび + に"],
+ ["빈칸에 들어갈 말로 알맞은 것은?","昨日[きのう] 友[とも]だちと ボランティアを （　　） 行[い]きました。",["しに","するに","するの","します","した"],0,"する → し + に"],
+ ["동사의 종류가 나머지와 <u>다른</u> 하나는?","",["見[み]る","食[た]べる","借[か]りる","起[お]きる","入[はい]る"],4,"入る는 예외 1류, 나머지는 2류"],
+ ["일본의 연중행사에 대한 설명으로 옳지 <u>않은</u> 것은?","",["히나마쓰리는 3월 3일이다.","단고노셋쿠에는 고이노보리를 매단다.","다나바타에는 단자쿠에 소원을 적는다.","시치고산은 11월 15일이다.","성인의 날은 1월 셋째 주 월요일이다."],4,"성인의 날은 1월 둘째 주 월요일"],
+ ["특별한 날과 먹는 음식이 바르게 연결된 것만을 있는 대로 고른 것은?","a. 세쓰분 - 에호마키<br>b. 히나마쓰리 - 가시와모치<br>c. 히나마쓰리 - 지라시즈시<br>d. 단고노셋쿠 - 지라시즈시",["a, b","a, c","b, c","b, d","c, d"],1,"가시와모치는 단고노셋쿠"]],
+ ord:[["다음 주 토요일에 친구를 만날 예정입니다.",["来週[らいしゅう]の","土[ど]ようび、","友[とも]だちに","会[あ]う","予定[よてい]です。"]],
+      ["자전거를 탈 수 있습니다.",["自転車[じてんしゃ]に","のる","ことが","できます。"]],
+      ["도서관에 책을 빌리러 갑니다.",["図書館[としょかん]に","本[ほん]を","借[か]りに","行[い]きます。"]]],
+ wr:[["장래 꿈은 선생님이 되는 것입니다.",["しょうらいの ゆめは 先生[せんせい]に なる ことです。"]],
+     ["매운 요리는 먹을 수 없습니다.",["からい 料理[りょうり]は 食[た]べる ことが できません。"]],
+     ["(말하기 수행) 'A: 来週の 土ようび、何を しますか。'에 '쇼핑하러 갈 예정'이라고 대답해 보세요.",["買[か]い物[もの]に 行[い]く 予定[よてい]です。"]]]},
+7:{mc:[
+ ["ない형이 바르지 <u>않은</u> 것은?","",["書[か]く → 書[か]かない","買[か]う → 買[か]あない","見[み]る → 見[み]ない","来[く]る → 来[こ]ない","する → しない"],1,"う로 끝나면 わ: 買わない"],
+ ["빈칸에 들어갈 말로 알맞은 것은?","(친구에게) 明日[あした] いっしょに ケーキを （　　）？",["作[つく]らない","作[つく]りない","作[つく]るない","作[つく]ない","作[つく]きない"],0,"1류: う단 → あ단 + ない"],
+ ["빈칸에 들어갈 말로 알맞은 것은?","今度[こんど]の 土[ど]ようび、カラオケに （　　）か。",["行[い]きません","行[い]かません","行[い]くません","行[い]けません","行[い]って"],0,"~ませんか는 ます형에서"],
+ ["빈칸에 들어갈 말로 알맞은 것은?","A: 明日[あした] いっしょに ジョギングを しませんか。<br>B: すみません。明日[あした]は （　　）……。",["ちょっと","いいですね","いいよ","そうそう","よろしく"],0,"거절: ~は ちょっと……"],
+ ["빈칸에 들어갈 말로 알맞은 것은?","A: 夏休[なつやす]み、何[なに]を （　　）ですか。<br>B: 花火[はなび]を 見[み]たいです。",["したい","しよう","しながら","しに","します"],0,"희망: ます형 + たいです"],
+ ["빈칸 (a), (b)에 들어갈 말로 알맞은 것은?","コーヒーを （a）ながら 本[ほん]を （b）。",["(a) 飲[の]み · (b) 読[よ]みます","(a) 飲[の]む · (b) 読[よ]みます","(a) 飲[の]ま · (b) 読[よ]みます","(a) 飲[の]んで · (b) 読[よ]みます","(a) 飲[の]まない · (b) 読[よ]みます"],0,"ながら 앞은 ます형"],
+ ["빈칸에 공통으로 들어갈 말로 알맞은 것은?","ぼくは おみくじ ひき（　　） 行[い]きたいな。<br>海[うみ]へ あそび（　　） 行[い]きませんか。",["に","を","で","と","が"],0,"목적: ます형 + に 行く"],
+ ["대화를 이해한 내용으로 알맞은 것은?","あやの: シウ君[くん]、今日[きょう] どこか 行[い]きたい ところ ある？<br>シウ: ぼくは おみくじ ひきに 行[い]きたいな。<br>まお: あ、わたしは おまもり 買[か]いたい！<br>あやの: じゃあ、今[いま]から みんなで あさくさに 行[い]かない？",["시우는 오마모리를 사고 싶어 한다.","마오는 오미쿠지를 뽑고 싶어 한다.","아야노는 아사쿠사에 가자고 제안했다.","시우는 혼자 아사쿠사에 간다.","친구들은 내일 아사쿠사에 간다."],2,"行かない? = 가지 않을래? (권유)"],
+ ["맞장구 표현으로 가장 알맞은 것은?","A: 今年[ことし]は さむいですね。<br>B: （　　）",["そうですね。","ちょっと……。","いいよ。","よろしく。","ごめん。"],0,"동의하는 맞장구: そうですね"],
+ ["빈칸 (a), (b)에 들어갈 말로 알맞은 것은?","A: あけまして （a）。<br>B: 今年[ことし]も （b） おねがいします。",["(a) おめでとうございます · (b) よろしく","(a) ありがとう · (b) よろしく","(a) おめでとう · (b) どうぞ","(a) すみません · (b) よろしく","(a) おめでとうございます · (b) ちょっと"],0,"새해 인사"],
+ ["밑줄 친 부분의 의미로 알맞은 것은?","じゃあ、今[いま]から みんなで あさくさに <u>行[い]かない</u>？",["가지 않을래? (권유)","안 가.","가고 싶어.","갔어.","갈 수 있어?"],0,"친구 사이 권유 ~ない?"],
+ ["글의 내용으로 알맞지 <u>않은</u> 것은?","わたしの ペットの なまえは ももです。ももは とても 小[ちい]さくて かわいいです。わたしは 毎日[まいにち] ももと さんぽを します。今度[こんど] いっしょに 旅行[りょこう]に 行[い]きたいです。",["반려동물 이름은 모모다.","모모는 작고 귀엽다.","매일 모모와 산책한다.","모모와 여행을 가고 싶어 한다.","모모와 매일 여행을 간다."],4,"旅行に 行きたい = 앞으로 가고 싶다"],
+ ["빈칸에 들어갈 말로 알맞은 것은?","おんせん（　　） 入[はい]りたいです。",["に","を","で","が","と"],0,"'~에 들어가다'는 ~に 入る"],
+ ["빈칸에 들어갈 글자로 알맞은 것은?","ダンスを 習[なら]（　　）たいです。",["い","わ","う","え","お"],0,"習う → ます형 習い + たい"],
+ ["일본의 연말연시에 대한 설명으로 옳지 <u>않은</u> 것은?","",["12월 31일에는 도시코시소바를 먹는다.","하쓰모데는 새해 첫 참배이다.","오조니는 우리나라 떡국과 비슷한 음식이다.","출입문 앞 소나무 장식은 가가미모치라고 한다.","연하장은 1월 1일 아침에 배달된다."],3,"출입문 앞 장식은 가도마쓰"],
+ ["일본의 설날에 대한 설명으로 옳은 것만을 있는 대로 고른 것은?","a. 후쿠와라이는 눈을 가리고 얼굴을 완성하는 놀이다.<br>b. 카루타는 주사위 놀이다.<br>c. 스고로쿠는 주사위를 던져 앞으로 나가는 놀이다.<br>d. 아이들은 세배를 하고 세뱃돈을 받는다.",["a, b","a, c","b, c","b, d","c, d"],1,"카루타는 카드놀이, 세배는 하지 않음"]],
+ ord:[["음악을 들으면서 조깅을 합니다.",["音楽[おんがく]を","聞[き]きながら","ジョギングを","します。"]],
+      ["일본에서 유카타를 사고 싶습니다.",["日本[にほん]で","ゆかたを","買[か]いたい","です。"]],
+      ["내일 같이 노래방에 가지 않겠습니까?",["明日[あした]","いっしょに","カラオケに","行[い]きませんか。"]]],
+ wr:[["저는 의사가 되고 싶습니다.",["わたしは 医者[いしゃ]に なりたいです。"]],
+     ["(친구에게) 이번 토요일 같이 영화 보러 갈래?",["今度[こんど]の 土[ど]ようび、いっしょに 映画[えいが]を 見[み]に 行[い]かない？"]],
+     ["(말하기 수행) 친구가 '明日 いっしょに ジョギング しない？'라고 했어요. 거절해 보세요.",["ごめん。明日[あした]は ちょっと……。"]]]}
+};
+
 /* 동사: 기본형|ます형|ない형|류|뜻|단원|주의 */
 const VERBS_RAW = `会[あ]う|会[あ]います|会[あ]わない|1|만나다|6|'~을 만나다'는 ~に 会う
 行[い]く|行[い]きます|行[い]かない|1|가다|6|
@@ -1039,6 +1170,55 @@ function qAuto(it){
   const t=["mean","mean","jsel"];if(hasKanji(it.j))t.push("yomi","yomi");const p=pick(t);
   return p==="yomi"?qYomi(it):p==="jsel"?qJsel(it):qMean(it);
 }
+
+function qOX(n,k){const[t,a,ex]=JCULT[n].ox[k];
+  return{qt:"cult",prompt:`<div class="gqline" style="font-family:var(--font-body);font-weight:600">${esc(t)}</div><div class="gqs">맞으면 ○, 틀리면 ✕</div>`,opts:['<b style="font-size:1.6rem">○</b>','<b style="font-size:1.6rem">✕</b>'],ans:a?0:1,pick:null,key:"gc"+n+":"+k,say:"",ex:esc(ex),miss:esc(n+"과 문화 · "+t.slice(0,16)+"…")}}
+function qListen(n,k){const[lines,q,opts]=ULISTEN[n][k];
+  const m=mkQ("ulisten",`<button class="qlisten" data-lplay="${esc(lines.map(sayOf).join("。"))}" aria-label="다시 듣기">${IC.spk}</button><div class="gqs" style="margin-top:6px">${esc(q)}</div>`,esc(opts[0]),opts.slice(1).map(esc),{key:"",say:"",ex:"",miss:esc(n+"과 듣기")});
+  m.script=lines;m.lsay=lines.map(sayOf);return m}
+
+/* ---- 단원 평가 ---- */
+const CIR="①②③④⑤";
+function qExam(n,k){const[q,ps,opts,a,ex]=EXAM[n].mc[k];
+  let order=[0,1,2,3,4];if(!/^[a-d], /.test(opts[0]))order=shuffle(order);
+  return{qt:"exam",prompt:`<div class="exq">${q}</div>${ps?`<div class="gqline exps">${rb(ps).replace(/&lt;br&gt;/g,"<br>").replace(/&lt;(\/?)u&gt;/g,"<$1u>")}</div>`:""}`,
+   opts:order.map((o,i)=>`<span class="cn">${CIR[i]}</span><span class="ja sm">${rb(opts[o]).replace(/&lt;(\/?)u&gt;/g,"<$1u>")}</span>`),ans:order.indexOf(a),pick:null,key:"ex"+n+":"+k,say:"",ex,miss:esc(n+"과 평가 "+(k+1)+"번"),longForce:true}}
+function normJa(x){return kanaOf(String(x)).replace(/[\s　、。,.!?！？「」…・~～]/g,"")}
+function normJa2(x){return plainOf(String(x)).replace(/[\s　、。,.!?！？「」…・~～]/g,"")}
+function mkOrd(n,k){const[ko,parts]=EXAM[n].ord[k];return{t:"ord",u:n,ko,parts,perm:shuffle(parts.map((_,i)=>i)),sel:[],q:{qt:"ord",pick:null,ans:0,key:"eo"+n+":"+k,miss:esc(n+"과 배열 · "+ko)}}}
+function mkWr(n,k){const[ko,ans]=EXAM[n].wr[k];return{t:"wr",u:n,ko,ans,stage:0,val:"",q:{qt:"wr",pick:null,ans:0,key:"ew"+n+":"+k,miss:esc(n+"과 서술형 · "+ko)}}}
+function ordHTML(r,idx,bg){const done=r.q.pick!==null,ok=r.q.pick===0;
+  return `<section class="reel center" data-idx="${idx}" style="${bg}"><div class="qr">
+    <span class="qtag">어순 배열 · 서술형 대비</span>
+    <div class="gqk" style="font-size:1.35rem;line-height:1.45">${esc(r.ko)}</div>
+    <div class="gqs">조각을 순서대로 눌러 문장을 완성하세요</div>
+    <div class="oslots ${done?(ok?"ok":"no"):""}">${r.sel.length?r.sel.map(i=>`<span class="ja">${rb(r.parts[i])}</span>`).join(""):`<span class="ph">여기에 문장이 만들어져요</span>`}</div>
+    <div class="ochips">${r.perm.map(i=>`<button class="ochip ja" data-ochip="${idx}:${i}" ${r.sel.includes(i)||done?"disabled":""}>${rb(r.parts[i])}</button>`).join("")}</div>
+    ${done?`<div class="qfeed"><img src="${ok?JUMP:CHAR}" alt=""><div class="bubble"><small>${esc(nm())}</small>${ok?"순서 완벽해!":"아깝다! 정답 순서를 확인해 봐"}<br><span class="ja" style="font-size:1rem;line-height:1.8">${r.parts.map(rb).join(" ")}</span></div></div>`:`<button class="rbtn" style="max-width:200px" data-oclear="${idx}">다시 고르기</button>`}
+  </div>${done?`<div class="swipe">${IC.down}다음</div>`:""}</section>`}
+function wrHTML(r,idx,bg){const done=r.q.pick!==null,ok=r.q.pick===0;
+  return `<section class="reel center" data-idx="${idx}" style="${bg}"><div class="qr">
+    <span class="qtag">서술형 · 직접 쓰기</span>
+    <div class="gqk" style="font-size:1.25rem;line-height:1.5">${esc(r.ko)}</div>
+    <textarea class="winput ja" id="wi${idx}" rows="2" placeholder="일본어로 써 보세요 (히라가나도 OK)" ${r.stage?"readonly":""}>${esc(r.val)}</textarea>
+    ${r.stage===0?`<div class="rbtns"><button class="rbtn" data-wrhand="${idx}">${IC.pen} 손으로 쓰기</button><button class="rbtn solid" data-wrcheck="${idx}">정답 확인</button></div>`:""}
+    ${r.stage>=1?`<div class="wans"><small>정답${r.ans.length>1?" (둘 중 하나)":""}</small>${r.ans.map(a=>`<div class="ja">${rb(a)}</div>`).join("")}<button class="speak" data-say="${esc(sayOf(r.ans[0]))}" aria-label="정답 듣기">${IC.spk}</button></div>`:""}
+    ${r.stage===1?`<div class="gqs">내 답과 비교해서 스스로 채점해요</div><div class="rbtns"><button class="rbtn" data-wrself="${idx}:0">틀렸어요</button><button class="rbtn solid" data-wrself="${idx}:1">맞게 썼어요</button></div>`:""}
+    ${done?`<div class="qfeed"><img src="${ok?JUMP:CHAR}" alt=""><div class="bubble"><small>${esc(nm())}</small>${ok?(r.auto?"정확해! 자동 채점 통과":"좋아, 서술형도 자신 있게!"):"괜찮아, 정답을 소리 내서 두 번 써 보자"}</div></div>`:""}
+  </div>${done?`<div class="swipe">${IC.down}다음</div>`:""}</section>`}
+function finishEx(idx,ok,el){const F=cur(),r=F.reels[idx];r.q.pick=ok?0:1;rate(r.q.key,ok);bump(ok?"qr":"qw");
+  const t=S.qt[r.q.qt]||(S.qt[r.q.qt]={r:0,w:0});ok?t.r++:t.w++;
+  if(ok){F.combo=(F.combo||0)+1;S.bestCombo=Math.max(S.bestCombo||0,F.combo);addXP(12,el);if(F.mode==="quiz")F.score=(F.score||0)+1}else F.combo=0;
+  checkBadges();save();refreshReel(idx);updateTop();if(ok)nextReel(idx,1400);if(F.mode==="quiz"&&F.reels[F.reels.length-1].t==="result"&&F.active>=F.reels.length-2)finishQuiz()}
+function startExam(kind){
+  if(tab==="reels"&&FEED)FEED.pos=($("#feed")||{}).scrollTop||0;
+  const k=kind.slice(7);let reels=[],title;
+  if(k==="essay"){reels=UNIT_NS.flatMap(n=>EXAM[n].ord.map((_,i)=>mkOrd(n,i)).concat(EXAM[n].wr.map((_,i)=>mkWr(n,i))));title="배열·서술형 모음"}
+  else{const n=+k,E=EXAM[n];reels=E.mc.map((_,i)=>({t:"gq",u:n,q:qExam(n,i)})).concat(E.ord.map((_,i)=>mkOrd(n,i)),E.wr.map((_,i)=>mkWr(n,i)));title=n+"과 단원 평가"}
+  reels.push({t:"result"});
+  QF={mode:"quiz",kind,title,reels,pos:0,active:0,combo:0,score:0,finished:false};
+  tab="quiz";try{history.replaceState(null,"","#quiz")}catch(e){}render();
+}
 /* ---- 단원 릴스 ---- */
 function unitReels(n,withReview){
   const U=UNIT[n],out=[];
@@ -1051,7 +1231,9 @@ function unitReels(n,withReview){
   U.gram.forEach((g,gi)=>out.push({t:"gram",u:n,i:gi}));
   shuffle(U.quiz.map((_,k)=>k)).slice(0,4).forEach(k=>out.push({t:"gq",u:n,q:qGram(n,k)}));
   if(n===6||n===7)shuffle(VERBS.filter(v=>v.u<=n).slice()).slice(0,4).forEach(v=>out.push({t:"gq",u:n,q:qConj(v,n===6?"m":"n")}));
-  out.push({t:"cult",u:n});
+  out.push({t:"cult",u:n},{t:"jcult",u:n});
+  shuffle(JCULT[n].ox.map((_,k)=>k)).slice(0,3).forEach(k=>out.push({t:"gq",u:n,q:qOX(n,k)}));
+  ULISTEN[n].forEach((_,k)=>out.push({t:"gq",u:n,q:qListen(n,k)}));
   U.chunks.forEach((c,ci)=>out.push({t:"dlg",u:n,c:ci}));
   out.push({t:"gq",u:n,q:qDlg(n)},{t:"gq",u:n,q:qDlg(n)});
   out.push({t:"uclear",u:n});
@@ -1117,6 +1299,12 @@ function unitReelHTML(r,idx){
       <div class="gcard"><div class="gt">${rb(c.t)}</div><div class="gr">${esc(c.r)}</div>
         ${c.ex.map(e=>`<div class="gex"><span class="j">${rb(e[0])}</span><button class="speak" data-say="${esc(sayOf(e[0].replace(/\(.*?\)/g,"")))}" aria-label="예문 듣기">${IC.spk}</button><span class="k">${esc(e[1])}</span></div>`).join("")}</div>
       <div class="swipe">${IC.down}다음</div></section>`}
+  if(r.t==="jcult"){const c=JCULT[r.u];
+    return `<section class="reel center" data-idx="${idx}" style="${bg}">${petals(5)}
+      <div class="utag">${U.n}과 일본 문화 · ${esc(c.pg)}</div>
+      <div class="gcard jc"><div class="gt" style="font-family:var(--font-display);font-weight:400">${esc(c.t)}</div><div class="gr">${esc(c.r)}</div>
+        ${c.it.map(x=>`<div class="jci"><b>${esc(x[0])}${x[1]?` <span class="ja">${esc(x[1])}</span>`:""}</b><span>${esc(x[2])}</span></div>`).join("")}</div>
+      <div class="swipe">${IC.down}다음</div></section>`}
   if(r.t==="dlg"){const ch=U.chunks[r.c];
     return `<section class="reel center" data-idx="${idx}" style="${bg}">
       <div class="utag">${U.n}과 본문 ${r.c+1}/${U.chunks.length}</div>
@@ -1133,31 +1321,35 @@ function unitReelHTML(r,idx){
       <div class="rbtns"><button class="rbtn" data-quizgo="u:${U.n}">${U.n}과 퀴즈</button>${nx?`<button class="rbtn solid" data-mode="${nx.n}">${nx.n}과로</button>`:`<button class="rbtn solid" data-quizgo="u:mix">섞어서 퀴즈</button>`}</div>
     </section>`}
   if(r.t==="gq")return gqHTML(r,idx,bg);
+  if(r.t==="ord")return ordHTML(r,idx,bg);
+  if(r.t==="wr")return wrHTML(r,idx,bg);
   return "";
 }
 function gqHTML(r,idx,bg){
   const q=r.q,done=q.pick!==null,ok=done&&q.pick===q.ans,one=q.long||q.longForce;
-  return `<section class="reel center" data-idx="${idx}" style="${bg||`--g1:${PAL.q[0]};--g2:${PAL.q[1]};--g3:${PAL.q[2]}`}">
+  return `<section class="reel center${q.qt==="exam"?" exr":""}" data-idx="${idx}" style="${bg||`--g1:${PAL.q[0]};--g2:${PAL.q[1]};--g3:${PAL.q[2]}`}">
     <div class="qr">
       <span class="qtag ${r.rev?"rev":""}">${r.rev?"복습 · 잊기 직전":QT[q.qt]||"퀴즈"}</span>
       <div class="gqp">${q.prompt}</div>
       <div class="combo">${r.combo>=2?r.combo+" 콤보":""}</div>
       <div class="qopts gqo ${one?"one":""}">${q.opts.map((o,i)=>{let k="";if(done){if(i===q.ans)k="right";else if(i===q.pick)k="wrong";else k="dim"}return `<button class="qopt ${k}" data-opt="${idx}:${i}" ${done?"disabled":""}>${o}</button>`}).join("")}</div>
-      ${done?`<div class="qfeed"><img src="${ok?JUMP:CHAR}" alt=""><div class="bubble"><small>${esc(nm())}</small>${esc(tpl(r.react||""))}${ok?(q.ex?`<br><span style="color:#5f6b8a;font-size:.85rem">${esc(q.ex)}</span>`:""):`<br><span style="color:#5f6b8a;font-size:.88rem">정답: ${q.opts[q.ans]}${q.ex?" · "+esc(q.ex):""}</span>`}</div></div>`:""}
+      ${done&&q.script?`<div class="lscript">${q.script.map((l,i)=>`<div><b>${i?"B":"A"}</b> <span class="ja">${rb(l)}</span></div>`).join("")}</div>`:""}${done?`<div class="qfeed"><img src="${ok?JUMP:CHAR}" alt=""><div class="bubble"><small>${esc(nm())}</small>${esc(tpl(r.react||""))}${ok?(q.ex?`<br><span style="color:#5f6b8a;font-size:.85rem">${esc(q.ex)}</span>`:""):`<br><span style="color:#5f6b8a;font-size:.88rem">정답: ${q.opts[q.ans]}${q.ex?" · "+esc(q.ex):""}</span>`}</div></div>`:""}
     </div>
     ${done?`<div class="swipe">${IC.down}다음</div>`:""}
   </section>`;
 }
 /* ---- 퀴즈 탭: 시험 범위 ---- */
-const UQKIND={"u:5":"5과 퀴즈","u:6":"6과 퀴즈","u:7":"7과 퀴즈","u:conj":"동사 활용","u:gram":"문법·조사 빈칸","u:dlg":"본문 대사","u:mix":"시험 범위 섞어서","u:due":"단원 복습","u:yomi":"한자 읽기"};
+const UQKIND={"u:cult":"일본 문화 OX","u:listen":"듣기 평가","u:5":"5과 퀴즈","u:6":"6과 퀴즈","u:7":"7과 퀴즈","u:conj":"동사 활용","u:gram":"문법·조사 빈칸","u:dlg":"본문 대사","u:mix":"시험 범위 섞어서","u:due":"단원 복습","u:yomi":"한자 읽기"};
 function startUQuiz(kind){
   if(tab==="reels"&&FEED)FEED.pos=($("#feed")||{}).scrollTop||0;
   const k=kind.slice(2);let qs=[];
   const gramQs=ns=>ns.flatMap(n=>UNIT[n].quiz.map((_,i)=>()=>qGram(n,i)));
-  if(k==="5"||k==="6"||k==="7"){const n=+k;qs=shuffle(UNIT[n].items.slice()).slice(0,6).map(it=>()=>qAuto(it)).concat(shuffle(gramQs([n])).slice(0,3),[()=>qDlg(n)])}
+  if(k==="5"||k==="6"||k==="7"){const n=+k;qs=shuffle(UNIT[n].items.slice()).slice(0,5).map(it=>()=>qAuto(it)).concat(shuffle(gramQs([n])).slice(0,3),[()=>qDlg(n),()=>qOX(n,Math.floor(Math.random()*JCULT[n].ox.length))])}
   else if(k==="conj")qs=shuffle(VERBS.slice()).slice(0,10).map(v=>()=>qConj(v,Math.random()<.5?"m":"n"));
   else if(k==="gram")qs=shuffle(gramQs(UNIT_NS)).slice(0,10);
   else if(k==="dlg")qs=Array.from({length:8},(_,i)=>()=>qDlg(UNIT_NS[i%3]));
+  else if(k==="cult")qs=shuffle(UNIT_NS.flatMap(n=>JCULT[n].ox.map((_,i)=>()=>qOX(n,i)))).slice(0,10);
+  else if(k==="listen")qs=UNIT_NS.flatMap(n=>ULISTEN[n].map((_,i)=>()=>qListen(n,i)));
   else if(k==="yomi")qs=shuffle(ALLITEMS.filter(it=>hasKanji(it.j))).slice(0,10).map(it=>()=>qYomi(it));
   else if(k==="due"){const d=uDue();if(!d.length){toast("오늘 복습할 단원 카드가 없어요");return}qs=shuffle(d).slice(0,10).map(it=>()=>qAuto(it))}
   else qs=shuffle(ALLITEMS.slice()).slice(0,5).map(it=>()=>qAuto(it)).concat(shuffle(gramQs(UNIT_NS)).slice(0,3),shuffle(VERBS.slice()).slice(0,2).map(v=>()=>qConj(v,Math.random()<.5?"m":"n")));
@@ -1177,7 +1369,7 @@ function viewUnits(){
     <div class="label">2학기 시험 범위</div>
     ${UNIT_NS.map(n=>{const U=UNIT[n];return `<button class="ucard" data-uview="${n}"><span class="unum" style="background:linear-gradient(160deg,${UPAL[n][0]},${UPAL[n][1]})">${n}</span><span class="ut"><b>${rb(U.title)}</b><small>${esc(U.ko)} · ${esc(U.pages)}</small><span class="ubar"><i style="width:${uPct(n)}%"></i></span><small class="num">단어 ${uSeenCount(n)}/${U.items.length} · 문법 ${uGramSeen(n)}/${U.gram.length} · 본문 ${uDlgSeen(n)}/${U.chunks.length}</small></span><span class="num" style="font-family:var(--font-display);font-size:1.2rem">${uPct(n)}%</span></button>`}).join("")}
 
-    <p class="muted small" style="margin:0">사진에 없는 쪽(91~93, 106~107, 119~121쪽 일본 문화)은 아직 비어 있어요. 사진을 주면 채울게요.</p>
+    <p class="muted small" style="margin:0">교과서 원본 PDF와 대조 완료 · 단어, 문법, 본문, 일본 문화, 듣기 대본, 실력 확인 정답</p>
   </div></div>`;
 }
 function viewUnitDetail(n){
@@ -1189,11 +1381,11 @@ function viewUnitDetail(n){
   if(unitPart==="v"){const vs=VERBS.filter(v=>v.u<=n);body=`<section class="panel" style="padding:12px;overflow-x:auto"><table class="vtab"><thead><tr><th>기본형</th><th>ます형</th><th>ない형</th><th>류</th></tr></thead><tbody>${vs.map(v=>`<tr><td><button data-say="${esc(sayOf(v.d))}">${rb(v.d)}</button><div class="k" style="font-family:var(--font-body);font-weight:400;font-size:.75rem;color:var(--muted)">${esc(v.k)}</div></td><td><button data-say="${esc(sayOf(v.m))}">${rb(v.m)}</button></td><td><button data-say="${esc(sayOf(v.n))}">${rb(v.n)}</button></td><td class="k">${v.g}${v.tip.includes("예외")?"*":""}</td></tr>`).join("")}</tbody></table><p class="muted small" style="margin:8px 0 0">* 帰る·入る는 예외 1류 · ${n===6?"6과 동사 30개":"5~7과 동사 전체"}</p></section>`}
   if(unitPart==="g")body=U.gram.map(g=>`<section class="lgc"><div class="gt">${rb(g.t)}</div><div class="gr">${g.r}</div>${g.ex.map(e=>`<div class="gex"><span class="j">${rb(e[0])}</span><button class="speak" data-say="${esc(sayOf(e[0]).replace(/→/g,"、"))}" aria-label="듣기">${IC.spk}</button><span class="k">${esc(e[1])}</span></div>`).join("")}${g.tip?`<div class="gtip">${rb(g.tip)}</div>`:""}</section>`).join("");
   if(unitPart==="d")body=`<section class="panel stack" style="gap:10px"><div class="muted small">${esc(U.dlg.scene)}</div><div class="row"><button class="btn primary wide" data-dall="${n}" data-rate="0.8">${IC.play} 전체 듣기</button><button class="btn wide" data-dall="${n}" data-rate="0.55">느리게</button></div><div class="dlines dlist" style="max-width:none">${U.dlg.lines.map(l=>`<button class="dl" data-say="${esc(sayOf(l[1]))}">${l[0]?`<span class="sp">${esc(l[0])}</span>`:""}<span class="j">${rb(l[1])}</span><span class="k">${esc(l[2])}</span></button>`).join("")}</div></section>`;
-  if(unitPart==="c")body=`<section class="lgc"><div class="gt">${rb(U.cult.t)}</div><div class="gr">${esc(U.cult.r)}</div>${U.cult.ex.map(e=>`<div class="gex"><span class="j">${rb(e[0])}</span><button class="speak" data-say="${esc(sayOf(e[0].replace(/\(.*?\)/g,"")))}" aria-label="듣기">${IC.spk}</button><span class="k">${esc(e[1])}</span></div>`).join("")}</section>`;
+  if(unitPart==="c")body=`<section class="lgc"><div class="label">일본 문화 · ${esc(JCULT[n].pg)}</div><div class="gt" style="font-family:var(--font-display);font-weight:400">${esc(JCULT[n].t)}</div><div class="gr">${esc(JCULT[n].r)}</div>${JCULT[n].it.map(x=>`<div class="jci"><b>${esc(x[0])}${x[1]?` <span class="ja">${esc(x[1])}</span>`:""}</b><span>${esc(x[2])}</span></div>`).join("")}</section><section class="lgc"><div class="label">언어문화 · にほんご もっと</div><div class="gt">${rb(U.cult.t)}</div><div class="gr">${esc(U.cult.r)}</div>${U.cult.ex.map(e=>`<div class="gex"><span class="j">${rb(e[0])}</span><button class="speak" data-say="${esc(sayOf(e[0].replace(/\(.*?\)/g,"")))}" aria-label="듣기">${IC.spk}</button><span class="k">${esc(e[1])}</span></div>`).join("")}</section>`;
   return `<div class="wrap">${topbar()}<div class="stack">
     <button class="backbtn" data-uview="">‹ 단원 목록</button>
     <div><div class="label">${n}과 · ${esc(U.pages)}</div><h1 class="ja" style="font-family:var(--font-ja);font-weight:600">${rb(U.title)}</h1><div class="muted">${esc(U.ko)}</div></div>
-    <div class="row"><button class="btn primary wide" data-mode="${n}">${IC.reels} ${n}과 릴스로 보기</button><button class="btn" data-furi>${S.furi?"읽는 법 숨기기":"읽는 법 보이기"}</button></div>
+    <div class="row"><button class="btn primary wide" data-mode="${n}">${IC.reels} ${n}과 릴스로 보기</button><button class="btn yellow" data-quizgo="u:exam:${n}">단원 평가</button><button class="btn" data-furi>${S.furi?"읽는 법 숨기기":"읽는 법 보이기"}</button></div>
     <div class="seg5" role="tablist">${parts.map(p=>`<button class="${unitPart===p[0]?"on":""}" data-upart="${p[0]}">${p[1]}</button>`).join("")}</div>
     ${body}
   </div></div>`;
@@ -1251,7 +1443,7 @@ function stageReels(si,withReview){
 }
 function makeKanaFeed(si){return{mode:"stage",si,next:si+1,reels:stageReels(si,true),pos:0,active:0,combo:0}}
 function newFeed(si){S.reelMode="kana";FEEDS.kana=makeKanaFeed(si);FEED=FEEDS.kana;save()}
-function isQ(r){return r.t==="quiz"||r.t==="gq"}
+function isQ(r){return r.t==="quiz"||r.t==="gq"||r.t==="ord"||r.t==="wr"}
 function cur(){return tab==="quiz"?QF:FEED}
 function reelBg(r){
   if(r.t==="quiz"||r.t==="result"){const p=r.q&&r.q.x?PAL[r.q.x.s][r.q.x.g]:PAL.q;const q=PAL.q;return `--g1:${q[0]};--g2:${q[1]};--g3:${p[1]}`}
@@ -1330,7 +1522,7 @@ function reelHTML(r,idx){
       <div class="ilabel">결과</div>
       <div class="bigscore num">${sc}<small>/${n}</small></div>
       <p style="margin:6px 0 0">${unanswered?`아직 안 푼 문제가 ${unanswered}개 있어`:sc===n?"만점! 진짜 최고야":sc/n>=.7?"잘했어! 틀린 것만 한 번 더 보면 완벽해":"괜찮아, 틀린 글자가 보이면 그게 실력이 느는 거야"}</p>
-      ${miss.length?`<div class="misslist">${miss.map(x=>x.t==="gq"?`<button data-say="${esc(x.q.say||"")}">${x.q.miss}</button>`:`<button data-say="${x.q.x.c}"><span class="ja">${x.q.x.c}</span>${esc(x.q.x.ko)}</button>`).join("")}</div>`:`<div style="height:18px"></div>`}
+      ${miss.length?`<div class="misslist">${miss.map(x=>x.q.miss!==undefined?`<button data-say="${esc(x.q.say||"")}">${x.q.miss}</button>`:`<button data-say="${x.q.x.c}"><span class="ja">${x.q.x.c}</span>${esc(x.q.x.ko)}</button>`).join("")}</div>`:`<div style="height:18px"></div>`}
       <div class="rbtns"><button class="rbtn" data-quiz-exit>퀴즈 목록</button><button class="rbtn solid" data-quizgo="${QF.kind}">한 판 더</button></div>
     </section>`;
   }
@@ -1372,6 +1564,7 @@ function onActive(idx){
   if(r.t==="quiz"&&r.q.pick===null&&S.sound&&unlocked&&(r.q.type==="listen"||r.q.type==="pick"))speak(r.q.x.c);
   if(r.t==="clear"&&stageDone(r.si)&&!S.cleared[STAGES[r.si].id]){S.cleared[STAGES[r.si].id]=today();S.xp+=30;r.xpGiven=1;save();refreshReel(idx);confetti(140);cheer(`${STAGES[r.si].title} 클리어! 역시 {I}야`,"ok");checkBadges()}
   if(r.t==="word"){const it=reelItem(r);if(view(it.key)){addXP(2,false);checkBadges();save()}if(S.sound&&unlocked)speakSeq(reelSay(r))}
+  if(r.t==="gq"&&r.q.qt==="ulisten"&&r.q.pick===null&&unlocked)speakLines(r.q.lsay,.8);
   if(r.t==="gram"){const k="g"+r.u+":"+r.i;if(!S.gseen[k]){S.gseen[k]=1;markStudied();addXP(3,false);checkBadges();save()}}
   if(r.t==="dlg"){const k="d"+r.u+":"+r.c;if(!S.dseen[k]){S.dseen[k]=1;markStudied();addXP(3,false);checkBadges();save()}}
   if(r.t==="uclear"&&uPct(r.u)>=100&&!S.ucleared[r.u]){S.ucleared[r.u]=today();S.xp+=50;r.xpGiven=1;save();refreshReel(idx);confetti(160);cheer(`${r.u}과 클리어! 역시 {I}야`,"ok");checkBadges()}
@@ -1424,6 +1617,7 @@ function quizPool(kind){
 }
 const QKIND={due:"오늘의 복습",h:"히라가나 퀴즈",k:"가타카나 퀴즈",conf:"헷갈리는 글자",listen:"듣고 고르기",wrong:"오답 격파",mix:"섞어서 퀴즈"};
 function startQuiz(kind){
+  if(kind.startsWith("u:exam"))return startExam(kind);
   if(kind.startsWith("u:"))return startUQuiz(kind);
   if(tab==="reels"&&FEED)FEED.pos=($("#feed")||{}).scrollTop||0;const pool=quizPool(kind);if(!pool.length){toast("먼저 릴스에서 글자를 봐 주세요");return}
   const reels=shuffle(pool.slice()).slice(0,10).map(x=>({t:"quiz",q:makeQ(x,kind==="listen"?"listen":null)}));
@@ -1446,13 +1640,18 @@ function viewQuiz(){
   return `<div class="wrap">${topbar()}<div class="stack">
     <h1>퀴즈</h1>
     <p class="muted" style="margin:-6px 0 0">문제도 릴스처럼 위로 밀면서 풀어요. 맞히면 1·3·7·14·30일 뒤에 다시 나와요.</p>
-    <div class="label" style="margin-top:4px">시험 범위 · 5~7과</div>
+    <div class="label" style="margin-top:4px">단원 평가 · 지도서 형식 예상 문제</div>
+    ${UNIT_NS.map(n=>m("u:exam:"+n,`<b style="font-family:var(--font-display);font-size:1.3rem">${n}</b>`,"var(--blue-soft)","var(--blue)",n+"과 단원 평가","5지선다 16 + 배열 3 + 서술형 3",EXAM[n].mc.length+EXAM[n].ord.length+EXAM[n].wr.length)).join("")}
+    ${m("u:exam:essay",IC.pen,"var(--mint-soft)","var(--mint)","배열·서술형 모음","5~7과 서술형만 모아 풀기",UNIT_NS.reduce((a,n)=>a+EXAM[n].ord.length+EXAM[n].wr.length,0))}
+    <div class="label" style="margin-top:8px">시험 범위 연습 · 5~7과</div>
     ${m("u:due",IC.again,"var(--coral-soft)","var(--coral)","단원 복습","잊어버리기 직전 단어·문법",uDue().length)}
     ${m("u:mix",IC.mix,"var(--blue-soft)","var(--blue)","시험 범위 섞어서","단어·문법·활용 10문항",ALLITEMS.length)}
     ${UNIT_NS.map(n=>m("u:"+n,`<b style="font-family:var(--font-display);font-size:1.3rem">${n}</b>`,"var(--pink-soft)","var(--pink)",n+"과 퀴즈",esc(plainOf(UNIT[n].title))+" · 단어·문법·본문",UNIT[n].items.length)).join("")}
     ${m("u:conj",IC.bolt,"var(--blue-soft)","var(--blue)","동사 활용","ます형·ない형 · 帰る 같은 예외까지",VERBS.length)}
     ${m("u:gram",IC.pen,"var(--mint-soft)","var(--mint)","문법·조사 빈칸","に会う·にのる 함정, 틀린 곳 고치기",UNIT_NS.reduce((a,n)=>a+UNIT[n].quiz.length,0))}
     ${m("u:yomi",`<b class="ja" style="font-size:1.3rem">漢</b>`,"var(--coral-soft)","var(--coral)","한자 읽기","今日·今年·昨日 같은 특수 읽기",ALLITEMS.filter(it=>hasKanji(it.j)).length)}
+    ${m("u:listen",IC.ear,"var(--mint-soft)","var(--mint)","듣기 평가","교과서 듣기 대본 · 실력 확인하기 1번",UNIT_NS.reduce((a,n)=>a+ULISTEN[n].length,0))}
+    ${m("u:cult",IC.flag,"var(--pink-soft)","var(--pink)","일본 문화 OX","마쓰리·연중행사·연말연시",UNIT_NS.reduce((a,n)=>a+JCULT[n].ox.length,0))}
     ${m("u:dlg",IC.book,"var(--pink-soft)","var(--pink)","본문 대사","한국어 뜻 보고 본문 문장 고르기",UNIT_NS.reduce((a,n)=>a+UNIT[n].dlg.lines.length,0))}
     <div class="label" style="margin-top:8px">히라가나·가타카나</div>
     ${m("due",IC.again,"var(--coral-soft)","var(--coral)","오늘의 복습","잊어버리기 직전에 다시 보기",due)}
@@ -1726,6 +1925,13 @@ document.addEventListener("click",e=>{
   if(d.upart){unitPart=d.upart;render();return}
   if(d.furi!==undefined){S.furi=S.furi?0:1;save();document.body.classList.toggle("nofuri",!S.furi);if(tab==="reels"){document.querySelectorAll("[data-furi] .ja").forEach(x=>x.textContent=S.furi?"あ":"漢")}else render();toast(S.furi?"한자 위 읽는 법을 보여 줘요":"읽는 법을 숨겼어요 · 한자 읽기 연습!");return}
   if(d.dplay!==undefined){const r=cur().reels[+d.dplay];speakLines(UNIT[r.u].chunks[r.c].map(l=>sayOf(l[1])),+d.rate);return}
+  if(d.ochip){const[a,b]=d.ochip.split(":").map(Number),r=cur().reels[a];if(r.q.pick!==null||r.sel.includes(b))return;r.sel.push(b);speak(sayOf(r.parts[b]));if(r.sel.length===r.parts.length){finishEx(a,r.sel.every((x,i)=>x===i),t)}else refreshReel(a);return}
+  if(d.oclear!==undefined){const r=cur().reels[+d.oclear];r.sel=[];refreshReel(+d.oclear);return}
+  if(d.wrcheck!==undefined){const i=+d.wrcheck,r=cur().reels[i],v=($("#wi"+i)||{}).value||"";r.val=v;
+    if(v.trim()&&r.ans.some(a=>normJa(a)===normJa(v)||normJa2(a)===normJa2(v))){r.stage=2;r.auto=1;finishEx(i,true,t)}else{r.stage=1;refreshReel(i)}return}
+  if(d.wrself){const[i,ok]=d.wrself.split(":").map(Number),r=cur().reels[i];r.stage=2;finishEx(i,!!ok,t);return}
+  if(d.wrhand!==undefined){const r=cur().reels[+d.wrhand];r.val=($("#wi"+d.wrhand)||{}).value||"";openWriter({chars:writeChars(plainOf(r.ans[0])),title:"서술형 손으로 쓰기",sub:esc(r.ko),say:sayOf(r.ans[0])});return}
+  if(d.lplay!==undefined){speakLines(d.lplay.split("。"),.8);return}
   if(d.dall!==undefined){speakLines(UNIT[+d.dall].dlg.lines.map(l=>sayOf(l[1])),+d.rate);return}
   if(d.close!==undefined){if(t.classList.contains("overlay")&&e.target!==t)return;$("#modal").innerHTML="";return}
   if(d.tab){if(d.tab==="quiz"&&tab==="quiz"&&QF){QF=null}if(d.tab==="reels"&&tab==="reels"){const f=$("#feed");if(f)f.scrollTo({top:0,behavior:"smooth"});return}go(d.tab);return}
